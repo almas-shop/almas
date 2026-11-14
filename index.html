@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الماس | عمده‌فروشی لباس زنانه</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--red:#ef394e;--ink:#23254e;--mut:#81858b;--line:#e0e0e6;--bg:#f1f2f4}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Vazirmatn','Tahoma',sans-serif;line-height:1.7}
+button,input{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top{display:flex;align-items:center;gap:18px;padding:12px 0}
+.logo{font-weight:800;font-size:28px;color:var(--red);white-space:nowrap}
+.search{flex:1;background:var(--bg);border-radius:10px;display:flex;align-items:center;padding:0 14px}
+.search input{flex:1;border:0;background:none;padding:11px 8px;outline:0}
+.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 16px;cursor:pointer;white-space:nowrap}
+.cart{position:relative}
+.cart b{position:absolute;top:-8px;inset-inline-start:-8px;background:var(--red);color:#fff;border-radius:10px;font-size:12px;min-width:20px;text-align:center;transition:transform .15s}
+nav{display:flex;gap:8px;padding:0 0 12px;overflow-x:auto}
+nav button{border:0;background:none;padding:7px 18px;border-radius:20px;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--red);color:#fff}
+nav button:not(.on):hover{color:var(--red)}
+.hero{margin:18px 0;border-radius:18px;min-height:220px;background:linear-gradient(120deg,#ef394e,#ff7a59);color:#fff;display:flex;align-items:center;padding:0 6%}
+.hero h1{margin:0 0 6px;font-size:clamp(26px,4.2vw,44px);font-weight:800}
+.hero p{margin:0;font-size:18px}
+h2.t{font-size:22px;margin:26px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:#fff;border-radius:12px;padding:12px;display:flex;flex-direction:column}
+.img{height:150px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:62px;margin-bottom:10px}
+.card h3{font-size:14px;font-weight:400;margin:0 0 6px;min-height:44px}
+.unit{color:var(--mut);font-size:13px}
+.pr{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:6px}
+.pk{background:var(--red);color:#fff;border-radius:20px;padding:0 10px;font-size:13px;font-weight:600;white-space:nowrap}
+.price{font-weight:800;font-size:17px;text-align:end}
+.add{margin-top:10px;background:var(--red);color:#fff;border:0;border-radius:8px;padding:9px;cursor:pointer}
+.add:hover{filter:brightness(.92)}
+.info{background:#fff;margin-top:40px;padding:30px 0;border-top:1px solid var(--line)}
+.info .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;text-align:center}
+.info b{display:block;color:var(--red);margin-bottom:2px}
+.info span{color:var(--mut)}
+footer{background:#fff;padding:16px 0 26px;color:var(--mut);font-size:14px;text-align:center}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:9}
+.ov.show{display:block}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-start:0;width:min(420px,100%);background:#fff;z-index:10;display:none;flex-direction:column}
+.drawer.show{display:flex}
+.dh{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-weight:600}
+.items{flex:1;overflow:auto;padding:12px 16px}
+.it{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.it .e{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.it .n{flex:1}
+.q{display:flex;align-items:center;gap:6px}
+.q button{width:26px;height:26px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+.df{border-top:1px solid var(--line);padding:14px 16px}
+.df input{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px}
+.tot{display:flex;justify-content:space-between;font-weight:800;margin:6px 0 10px}
+.pay{width:100%;background:var(--red);color:#fff;border:0;border-radius:10px;padding:12px;cursor:pointer;font-weight:600}
+.empty{text-align:center;color:var(--mut);padding:40px 0}
+.inv{position:fixed;inset:0;z-index:20;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.55);overflow:auto;padding:20px}
+.inv.show{display:flex}
+.paper{background:#fff;width:min(760px,100%);border-radius:12px;padding:28px}
+.acts{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.acts button{flex:1;min-width:130px;padding:11px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.acts .p{background:var(--red);border-color:var(--red);color:#fff}
+#paper .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;color:var(--mut);font-size:14px;margin:8px 0 12px;border-bottom:2px solid var(--red);padding-bottom:10px}
+#paper .sh{font-size:13px;color:var(--mut);margin-bottom:10px;line-height:2}
+#paper .by{font-size:14px;margin-bottom:16px}
+#paper table{width:100%;border-collapse:collapse;font-size:14px}
+#paper th,#paper td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+#paper th:nth-child(2),#paper td:nth-child(2){text-align:start;white-space:normal}
+#paper th{background:var(--bg)}
+#paper .tw{overflow-x:auto}
+#paper .sum{margin-top:16px;margin-inline-start:auto;width:min(320px,100%);font-size:15px}
+#paper .sum div{display:flex;justify-content:space-between;gap:20px;padding:5px 0}
+#paper .sum .g{font-weight:800;font-size:18px;color:var(--red);border-top:2px solid var(--red);margin-top:6px;padding-top:8px}
+.stk{font-size:13px;color:var(--mut);margin-top:2px}
+.stk.low{color:#e67e00;font-weight:600}
+.stk.out{color:var(--red);font-weight:600}
+.add:disabled{background:#c9cbd1;cursor:not-allowed;filter:none}
+@media(max-width:640px){.top{flex-wrap:wrap}.search{order:3;flex-basis:100%}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<div class="top">
+<div class="logo">💎 الماس</div>
+<div class="search">🔍<input id="q" placeholder="جستجو در پک‌ها..." oninput="draw()"></div>
+<button class="btn cart" onclick="openCart()">🛒 سبد خرید<b id="n">۰</b></button>
+</div>
+<nav id="nav"></nav>
+</div>
+</header>
+
+<div class="wrap">
+<div class="hero"><div><h1>عمده‌فروشی پوشاک زنانه الماس</h1><p>شلوار، مانتو، شومیز، بافت و کت؛ فروش به‌صورت پک</p></div></div>
+<h2 class="t" id="ttl">همه‌ی محصولات</h2>
+<div class="grid" id="grid"></div>
+</div>
+
+<div class="info"><div class="wrap"><div class="g" id="info"></div></div></div>
+<footer>© الماس · مدیریت: مرادی</footer>
+
+<div class="ov" id="ov" onclick="closeCart()"></div>
+<div class="drawer" id="dr">
+<div class="dh"><span>سبد خرید</span><button class="btn" onclick="closeCart()">✕</button></div>
+<div class="items" id="items"></div>
+<div class="df">
+<input id="cn" placeholder="نام خریدار / نام فروشگاه (برای فاکتور)">
+<input id="cp" placeholder="شماره تماس">
+<div class="tot"><span>مبلغ قابل پرداخت</span><span id="tt">۰</span></div>
+<button class="pay" id="pay" onclick="invoice()">ثبت سفارش و نمایش فاکتور</button>
+</div>
+</div>
+
+<div class="inv" id="inv"><div class="paper"><div id="paper"></div>
+<div class="acts"><button class="p" onclick="printInv()">🖨 چاپ فاکتور</button><button onclick="editCart()">✏️ ویرایش سبد خرید</button><button onclick="done()">بستن و سفارش جدید</button></div></div></div>
+
+<script>
+// ===== اطلاعات مغازه: اینجا را ویرایش کنید =====
+var S={name:'الماس',address:'آدرس مغازه را اینجا بنویسید',phone:'شماره تماس را اینجا بنویسید',hours:'ساعت کاری را اینجا بنویسید'};
+// ===== اتصال به گوگل شیت: آدرس وب‌اپ را بین کوتیشن‌ها بگذار. اگر خالی باشد سایت با داده‌ی نمونه و بدون اتصال کار می‌کند =====
+var API_URL='https://script.google.com/macros/s/AKfycbxSxSyNjUBxVs8CfLAVWwSvbugQ0aATQQ2xGef6MERwU-jXiQUqtC0EJh7L9gxcVT89/exec';
+// ===== محصولات (فقط برای حالت بدون اتصال): [دسته، نام، قیمت هر عدد (تومان)، تعداد در هر پک، موجودی انبار (تعداد پک)، رنگ زمینه] =====
+// ===== (قدیمی) محصولات: [دسته، نام، قیمت هر عدد (تومان)، تعداد در هر پک، موجودی انبار (تعداد پک)، رنگ زمینه] =====
+var C=['شلوار','مانتو','شومیز','بافت','کت'];
+var E={'شلوار':'👖','مانتو':'🧥','شومیز':'👚','بافت':'🧶','کت':'🥼'};
+var P=[
+['شلوار','شلوار جین مام‌فیت',450000,6,24,'#e8f0ff'],
+['شلوار','شلوار کتان راسته',380000,6,15,'#eaf7ee'],
+['شلوار','شلوار پارچه‌ای دمپا',420000,4,3,'#f3eaff'],
+['مانتو','مانتو اسپرت بلند',700000,4,12,'#fff1e6'],
+['مانتو','مانتو مجلسی کرپ',950000,4,0,'#fdeaf4'],
+['مانتو','مانتو جلوباز تابستانه',600000,6,30,'#e9f5f7'],
+['شومیز','شومیز حریر یقه‌دار',320000,6,8,'#ffeaea'],
+['شومیز','شومیز ساتن آستین‌پفی',400000,6,40,'#fdf3e1'],
+['شومیز','شومیز نخی ساده',260000,8,18,'#eaf7ee'],
+['بافت','پلیور بافت دورس',450000,4,5,'#f3eaff'],
+['بافت','ژاکت بافت کش‌دار',500000,4,22,'#e8f0ff'],
+['بافت','ست بافت دو تکه',800000,3,2,'#fdeaf4'],
+['کت','کت تک جین',650000,4,10,'#e9f5f7'],
+['کت','کت رسمی ساده',1050000,4,14,'#eef0f3'],
+['کت','کت کوتاه تویید',900000,3,7,'#fff1e6']
+].map(function(p,i){return {id:i,sid:i+1,cat:p[0],name:p[1],unit:p[2],pack:p[3],stock:p[4],bg:p[5]}});
+var cat='همه',cart=[],pend=null;
+var sig=P.map(function(p){return p.id+':'+p.stock}).join(',');
+try{var sv=JSON.parse(localStorage.getItem('almasStock')||'null');
+ if(sv&&sv.sig===sig&&sv.s.length===P.length)P.forEach(function(p,i){p.stock=sv.s[i]})}catch(e){}
+function saveStock(){if(API_URL)return;try{localStorage.setItem('almasStock',JSON.stringify({sig:sig,s:P.map(function(p){return p.stock})}))}catch(e){}}
+function fa(x){return Math.round(x).toLocaleString('fa-IR')}
+function pp(p){return p.unit*p.pack}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function nav(){
+ document.getElementById('nav').innerHTML=['همه'].concat(C).map(function(c){
+  return '<button class="'+(c===cat?'on':'')+'" onclick="setCat(\''+c+'\')">'+c+'</button>'}).join('');
+}
+function setCat(c){cat=c;nav();draw()}
+function draw(){
+ var q=document.getElementById('q').value.trim();
+ var l=P.filter(function(p){return (cat==='همه'||p.cat===cat)&&(!q||p.name.indexOf(q)>-1)});
+ document.getElementById('ttl').textContent=cat==='همه'?'همه‌ی محصولات':cat;
+ document.getElementById('grid').innerHTML=l.length?l.map(function(p){
+  return '<div class="card"><div class="img" style="background:'+p.bg+'">'+(E[p.cat]||'🛍')+'</div><h3>'+p.name+'</h3>'+
+  '<div class="unit">قیمت هر عدد: '+fa(p.unit)+' تومان</div>'+
+  (p.stock<=0?'<div class="stk out">ناموجود</div>':p.stock<=3?'<div class="stk low">تنها '+fa(p.stock)+' پک باقی مانده</div>':'<div class="stk">موجودی انبار: '+fa(p.stock)+' پک</div>')+
+  '<div class="pr"><span class="pk">پک '+fa(p.pack)+' تایی</span><div class="price">'+fa(pp(p))+' <small>تومان</small></div></div>'+
+  (p.stock<=0?'<button class="add" disabled>ناموجود</button>':'<button class="add" onclick="add('+p.id+')">افزودن پک به سبد</button>')+'</div>'}).join(''):'<p>کالایی پیدا نشد.</p>';
+}
+function add(id){
+ var f=cart.filter(function(c){return c.id===id})[0];
+ if((f?f.q:0)>=P[id].stock){alert('موجودی کافی نیست. موجودی انبار این کالا '+fa(P[id].stock)+' پک است.');return}
+ if(f)f.q++;else cart.push({id:id,q:1});
+ upd();
+ var b=document.getElementById('n');b.style.transform='scale(1.4)';setTimeout(function(){b.style.transform=''},180);
+}
+function chg(i,d){if(d>0&&cart[i].q>=P[cart[i].id].stock){alert('موجودی کافی نیست. موجودی انبار این کالا '+fa(P[cart[i].id].stock)+' پک است.');return}cart[i].q+=d;if(cart[i].q<1)cart.splice(i,1);upd()}
+function total(){return cart.reduce(function(s,c){return s+pp(P[c.id])*c.q},0)}
+function upd(){
+ document.getElementById('n').textContent=fa(cart.reduce(function(s,c){return s+c.q},0));
+ document.getElementById('tt').textContent=fa(total())+' تومان';
+ document.getElementById('items').innerHTML=cart.length?cart.map(function(c,i){var p=P[c.id];
+  return '<div class="it"><div class="e" style="background:'+p.bg+'">'+(E[p.cat]||'🛍')+'</div><div class="n">'+p.name+'<br><small style="color:var(--mut)">پک '+fa(p.pack)+' تایی · '+fa(pp(p))+' تومان</small></div>'+
+  '<div class="q"><button onclick="chg('+i+',1)">+</button>'+fa(c.q)+'<button onclick="chg('+i+',-1)">−</button></div></div>'}).join(''):'<div class="empty">سبد خرید شما خالی است</div>';
+}
+function openCart(){document.getElementById('ov').classList.add('show');document.getElementById('dr').classList.add('show')}
+function closeCart(){document.getElementById('ov').classList.remove('show');document.getElementById('dr').classList.remove('show')}
+function invNo(d){
+ var y,m,dd,z=function(n){return ('0'+n).slice(-2)};
+ try{
+  var p=new Intl.DateTimeFormat('en-u-ca-persian-nu-latn',{year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);
+  var g=function(t){return p.filter(function(x){return x.type===t})[0].value};
+  y=g('year');m=g('month');dd=g('day');
+ }catch(e){y=d.getFullYear();m=z(d.getMonth()+1);dd=z(d.getDate())}
+ var r;
+ try{var a=new Uint32Array(1);crypto.getRandomValues(a);r=a[0]%10000}catch(e){r=Math.floor(Math.random()*10000)}
+ var t=y+z(m)+z(dd)+'-'+z(d.getHours())+z(d.getMinutes())+z(d.getSeconds())+'-'+('000'+r).slice(-4);
+ return t.replace(/\d/g,function(c){return '۰۱۲۳۴۵۶۷۸۹'[c]});
+}
+var invHTML='',committed=false,curInv='';
+function api(action,data){
+ return fetch(API_URL,{method:'POST',body:JSON.stringify(Object.assign({action:action},data))}).then(function(r){return r.json()});
+}
+function applyProducts(list){
+ var keep=cart.map(function(c){return {sid:P[c.id]&&P[c.id].sid,q:c.q}});
+ P=list.map(function(p,i){return {id:i,sid:p.sid,cat:p.cat,name:p.name,unit:p.unit,pack:p.pack,stock:p.stock,bg:p.bg}});
+ cart=keep.map(function(k){for(var i=0;i<P.length;i++){if(P[i].sid===k.sid)return {id:i,q:k.q}}return null}).filter(Boolean);
+ C=[];P.forEach(function(p){if(C.indexOf(p.cat)<0)C.push(p.cat)});
+ if(cat!=='همه'&&C.indexOf(cat)<0)cat='همه';
+ nav();draw();upd();
+}
+function loadProducts(){
+ fetch(API_URL+'?action=products&t='+Date.now()).then(function(r){return r.json()}).then(function(r){
+  if(!r.ok)throw 0;applyProducts(r.products);
+ }).catch(function(){document.getElementById('grid').innerHTML='<p>ارتباط با انبار برقرار نشد. اینترنت را بررسی کن و صفحه را دوباره باز کن.</p>'});
+}
+function setBusy(b){var x=document.getElementById('pay');x.disabled=b;x.textContent=b?'در حال ثبت سفارش...':'ثبت سفارش و نمایش فاکتور'}
+function buildInv(num,d){
+ var rows='',sum=0,pieces=0,packs=0;
+ cart.forEach(function(c,i){var p=P[c.id],t=pp(p)*c.q;sum+=t;pieces+=p.pack*c.q;packs+=c.q;
+  rows+='<tr><td>'+fa(i+1)+'</td><td>'+esc(p.name)+'</td><td>'+fa(c.q)+'</td><td>'+fa(p.pack)+'</td><td>'+fa(p.unit)+'</td><td>'+fa(t)+'</td></tr>'});
+ invHTML='<h2 style="margin:0;color:#ef394e">💎 '+esc(S.name)+' <small style="font-size:14px;color:#81858b">عمده‌فروشی پوشاک زنانه</small></h2>'+
+ '<div class="meta"><span>فاکتور فروش شماره <bdi dir="ltr">'+num+'</bdi></span><span>تاریخ: '+d.toLocaleDateString('fa-IR')+' · '+d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})+'</span></div>'+
+ '<div class="sh">آدرس: '+esc(S.address)+'<br>تلفن: '+esc(S.phone)+' · ساعت کاری: '+esc(S.hours)+'</div>'+
+ '<div class="by">خریدار: <b>'+(esc(document.getElementById('cn').value)||'—')+'</b> · تلفن: '+(esc(document.getElementById('cp').value)||'—')+'</div>'+
+ '<div class="tw"><table><thead><tr><th>ردیف</th><th>شرح کالا</th><th>تعداد پک</th><th>تعداد در پک</th><th>قیمت هر عدد</th><th>مبلغ</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+ '<div class="sum"><div><span>جمع پک‌ها</span><span>'+fa(packs)+'</span></div><div><span>جمع کل تعداد (عدد)</span><span>'+fa(pieces)+'</span></div><div class="g"><span>مبلغ قابل پرداخت</span><span>'+fa(sum)+' تومان</span></div></div>';
+ document.getElementById('paper').innerHTML=invHTML;
+}
+function showInv(){closeCart();document.getElementById('inv').classList.add('show')}
+function invoice(){
+ if(!cart.length){alert('سبد خرید خالی است.');return}
+ for(var k=0;k<cart.length;k++){if(cart[k].q>P[cart[k].id].stock){alert('موجودی «'+P[cart[k].id].name+'» کافی نیست. موجودی انبار: '+fa(P[cart[k].id].stock)+' پک');return}}
+ var items=cart.map(function(c){return {sid:P[c.id].sid,q:c.q}});
+ var sg=JSON.stringify(items);
+ if(!pend||pend.sg!==sg){var d0=new Date();pend={sg:sg,d:d0,num:invNo(d0)}}
+ var num=pend.num,d=pend.d;
+ if(!API_URL){ // حالت بدون اتصال: موجودی فقط در همین مرورگر
+  buildInv(num,d);cart.forEach(function(c){P[c.id].stock-=c.q});saveStock();committed=true;pend=null;draw();showInv();return;
+ }
+ setBusy(true);
+ api('order',{inv:num,name:document.getElementById('cn').value,phone:document.getElementById('cp').value,items:items}).then(function(r){
+  setBusy(false);pend=null;
+  if(r.products)applyProducts(r.products);
+  if(!r.ok){alert(r.error||'ثبت سفارش انجام نشد.');return}
+  curInv=num;committed=true;buildInv(num,d);showInv();
+ }).catch(function(){setBusy(false);alert('ارتباط با سرور برقرار نشد. اینترنت را بررسی کن و دوباره دکمه‌ی ثبت سفارش را بزن.')});
+}
+var ICSS='body{font-family:Vazirmatn,Tahoma,sans-serif;color:#23254e;margin:0;padding:24px;line-height:1.7}'+
+'.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#81858b;font-size:14px;margin:8px 0 12px;border-bottom:2px solid #ef394e;padding-bottom:10px}'+
+'.sh{font-size:13px;color:#81858b;margin-bottom:10px}.by{font-size:14px;margin-bottom:14px}'+
+'table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:11px 14px;border-bottom:1px solid #e0e0e6;text-align:center;white-space:nowrap}th:nth-child(2),td:nth-child(2){text-align:start;white-space:normal}th{background:#f1f2f4}'+
+'.sum{margin-top:16px;margin-inline-start:auto;width:320px;max-width:100%;font-size:15px}.sum div{display:flex;justify-content:space-between;gap:20px;padding:5px 0}'+
+'.sum .g{font-weight:800;font-size:18px;color:#ef394e;border-top:2px solid #ef394e;margin-top:6px;padding-top:8px}';
+function fullDoc(auto){
+ return '<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>فاکتور الماس</title>'+
+ '<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet"><style>'+ICSS+'</style></head><body>'+invHTML+
+ (auto?'<script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>':'')+'</body></html>';
+}
+function printInv(){
+ var f=document.createElement('iframe');
+ f.style.cssText='position:fixed;width:0;height:0;border:0;right:0;bottom:0';
+ document.body.appendChild(f);
+ var d=f.contentWindow.document;d.open();d.write(fullDoc(false));d.close();
+ setTimeout(function(){
+  try{f.contentWindow.focus();f.contentWindow.print()}catch(e){alert('چاپ در این مرورگر پشتیبانی نمی‌شود.')}
+  setTimeout(function(){f.remove()},30000);
+ },700);
+}
+function editCart(){
+ function back(){document.getElementById('inv').classList.remove('show');openCart()}
+ if(!committed){back();return}
+ if(!API_URL){cart.forEach(function(c){P[c.id].stock+=c.q});saveStock();committed=false;draw();back();return}
+ api('cancel',{inv:curInv}).then(function(r){
+  if(!r.ok){alert(r.error||'لغو سفارش انجام نشد.');return}
+  if(r.products)applyProducts(r.products);
+  committed=false;back();
+ }).catch(function(){alert('ارتباط با سرور برقرار نشد. دوباره تلاش کن.')});
+}
+function done(){committed=false;curInv='';cart=[];upd();draw();document.getElementById('inv').classList.remove('show')}
+// بخش اطلاعات مغازه
+(function(){
+ var tel=/[0-9۰-۹]/.test(S.phone)?'<a href="tel:'+S.phone.replace(/[^0-9+]/g,'')+'">'+esc(S.phone)+'</a>':esc(S.phone);
+ document.getElementById('info').innerHTML=
+ '<div><b>📍 آدرس مغازه</b><span>'+esc(S.address)+'</span></div>'+
+ '<div><b>🕘 ساعت کاری</b><span>'+esc(S.hours)+'</span></div>'+
+ '<div><b>📞 شماره تماس</b><span>'+tel+'</span></div>';
+})();
+if(API_URL){document.getElementById('grid').innerHTML='<p>در حال بارگذاری محصولات...</p>';nav();upd();loadProducts()}else{nav();draw();upd()}
+</script>
+</body>
+</html>
