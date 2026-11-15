@@ -30,7 +30,8 @@ nav button:not(.on):hover{color:var(--red)}
 h2.t{font-size:22px;margin:26px 0 14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .card{background:#fff;border-radius:12px;padding:12px;display:flex;flex-direction:column}
-.img{height:150px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:62px;margin-bottom:10px}
+.img{height:150px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:62px;margin-bottom:10px;overflow:hidden}
+.img img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
 .card h3{font-size:14px;font-weight:400;margin:0 0 6px;min-height:44px}
 .unit{color:var(--mut);font-size:13px}
 .pr{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:6px}
@@ -50,7 +51,8 @@ footer{background:#fff;padding:16px 0 26px;color:var(--mut);font-size:14px;text-
 .dh{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-weight:600}
 .items{flex:1;overflow:auto;padding:12px 16px}
 .it{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
-.it .e{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.it .e{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden;flex-shrink:0}
+.it .e img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block}
 .it .n{flex:1}
 .q{display:flex;align-items:center;gap:6px}
 .q button{width:26px;height:26px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
@@ -125,7 +127,6 @@ var S={name:'الماس',address:'آدرس مغازه را اینجا بنویس
 // ===== اتصال به گوگل شیت: آدرس وب‌اپ را بین کوتیشن‌ها بگذار. اگر خالی باشد سایت با داده‌ی نمونه و بدون اتصال کار می‌کند =====
 var API_URL='https://script.google.com/macros/s/AKfycbxSxSyNjUBxVs8CfLAVWwSvbugQ0aATQQ2xGef6MERwU-jXiQUqtC0EJh7L9gxcVT89/exec';
 // ===== محصولات (فقط برای حالت بدون اتصال): [دسته، نام، قیمت هر عدد (تومان)، تعداد در هر پک، موجودی انبار (تعداد پک)، رنگ زمینه] =====
-// ===== (قدیمی) محصولات: [دسته، نام، قیمت هر عدد (تومان)، تعداد در هر پک، موجودی انبار (تعداد پک)، رنگ زمینه] =====
 var C=['شلوار','مانتو','شومیز','بافت','کت'];
 var E={'شلوار':'👖','مانتو':'🧥','شومیز':'👚','بافت':'🧶','کت':'🥼'};
 var P=[
@@ -144,7 +145,7 @@ var P=[
 ['کت','کت تک جین',650000,4,10,'#e9f5f7'],
 ['کت','کت رسمی ساده',1050000,4,14,'#eef0f3'],
 ['کت','کت کوتاه تویید',900000,3,7,'#fff1e6']
-].map(function(p,i){return {id:i,sid:i+1,cat:p[0],name:p[1],unit:p[2],pack:p[3],stock:p[4],bg:p[5]}});
+].map(function(p,i){return {id:i,sid:i+1,cat:p[0],name:p[1],unit:p[2],pack:p[3],stock:p[4],bg:p[5],img:''}});
 var cat='همه',cart=[],pend=null;
 var sig=P.map(function(p){return p.id+':'+p.stock}).join(',');
 try{var sv=JSON.parse(localStorage.getItem('almasStock')||'null');
@@ -153,6 +154,13 @@ function saveStock(){if(API_URL)return;try{localStorage.setItem('almasStock',JSO
 function fa(x){return Math.round(x).toLocaleString('fa-IR')}
 function pp(p){return p.unit*p.pack}
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+// عکس محصول: اگر اسم فایل در شیت باشد از پوشه‌ی images لود می‌شود، وگرنه (یا اگر لود نشد) ایموجی دسته نمایش داده می‌شود
+function pic(p){
+ var em=E[p.cat]||'🛍';
+ return p.img&&/^[\w.\-]+$/.test(p.img)
+  ?'<img src="images/'+p.img+'" alt="" loading="lazy" onerror="this.outerHTML=\''+em+'\'">'
+  :em;
+}
 function nav(){
  document.getElementById('nav').innerHTML=['همه'].concat(C).map(function(c){
   return '<button class="'+(c===cat?'on':'')+'" onclick="setCat(\''+c+'\')">'+c+'</button>'}).join('');
@@ -163,7 +171,7 @@ function draw(){
  var l=P.filter(function(p){return (cat==='همه'||p.cat===cat)&&(!q||p.name.indexOf(q)>-1)});
  document.getElementById('ttl').textContent=cat==='همه'?'همه‌ی محصولات':cat;
  document.getElementById('grid').innerHTML=l.length?l.map(function(p){
-  return '<div class="card"><div class="img" style="background:'+p.bg+'">'+(E[p.cat]||'🛍')+'</div><h3>'+p.name+'</h3>'+
+  return '<div class="card"><div class="img" style="background:'+p.bg+'">'+pic(p)+'</div><h3>'+p.name+'</h3>'+
   '<div class="unit">قیمت هر عدد: '+fa(p.unit)+' تومان</div>'+
   (p.stock<=0?'<div class="stk out">ناموجود</div>':p.stock<=3?'<div class="stk low">تنها '+fa(p.stock)+' پک باقی مانده</div>':'<div class="stk">موجودی انبار: '+fa(p.stock)+' پک</div>')+
   '<div class="pr"><span class="pk">پک '+fa(p.pack)+' تایی</span><div class="price">'+fa(pp(p))+' <small>تومان</small></div></div>'+
@@ -182,7 +190,7 @@ function upd(){
  document.getElementById('n').textContent=fa(cart.reduce(function(s,c){return s+c.q},0));
  document.getElementById('tt').textContent=fa(total())+' تومان';
  document.getElementById('items').innerHTML=cart.length?cart.map(function(c,i){var p=P[c.id];
-  return '<div class="it"><div class="e" style="background:'+p.bg+'">'+(E[p.cat]||'🛍')+'</div><div class="n">'+p.name+'<br><small style="color:var(--mut)">پک '+fa(p.pack)+' تایی · '+fa(pp(p))+' تومان</small></div>'+
+  return '<div class="it"><div class="e" style="background:'+p.bg+'">'+pic(p)+'</div><div class="n">'+p.name+'<br><small style="color:var(--mut)">پک '+fa(p.pack)+' تایی · '+fa(pp(p))+' تومان</small></div>'+
   '<div class="q"><button onclick="chg('+i+',1)">+</button>'+fa(c.q)+'<button onclick="chg('+i+',-1)">−</button></div></div>'}).join(''):'<div class="empty">سبد خرید شما خالی است</div>';
 }
 function openCart(){document.getElementById('ov').classList.add('show');document.getElementById('dr').classList.add('show')}
@@ -205,7 +213,7 @@ function api(action,data){
 }
 function applyProducts(list){
  var keep=cart.map(function(c){return {sid:P[c.id]&&P[c.id].sid,q:c.q}});
- P=list.map(function(p,i){return {id:i,sid:p.sid,cat:p.cat,name:p.name,unit:p.unit,pack:p.pack,stock:p.stock,bg:p.bg}});
+ P=list.map(function(p,i){return {id:i,sid:p.sid,cat:p.cat,name:p.name,unit:p.unit,pack:p.pack,stock:p.stock,bg:p.bg,img:p.img||''}});
  cart=keep.map(function(k){for(var i=0;i<P.length;i++){if(P[i].sid===k.sid)return {id:i,q:k.q}}return null}).filter(Boolean);
  C=[];P.forEach(function(p){if(C.indexOf(p.cat)<0)C.push(p.cat)});
  if(cat!=='همه'&&C.indexOf(cat)<0)cat='همه';
